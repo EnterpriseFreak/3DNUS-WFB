@@ -82,8 +82,6 @@ namespace _3DNUS
 
             dlProgess.Step = 100 / contentcounter;
 
-            //log("Title has " + contentcounter + " contents");
-
             //download files
             WebClient contd = new WebClient();
             for (int i = 1; i <= contentcounter; i++)
@@ -94,10 +92,18 @@ namespace _3DNUS
                 tmd.Read(cid, 0, 4);
                 string contentid = BitConverter.ToString(cid).Replace("-", "");
                 string downname = ftmp + "\\" + contentid;
-                contd.DownloadFile(server + title + "/" + contentid, @downname);
+
+                try
+                {
+                    contd.DownloadFile(server + title + "/" + contentid, @downname);
+                }
+                catch (WebException)
+                {
+                    MessageBox.Show("Der Download einer für den Titel notwendigen Datei ist fehlgeschlagen dies bedeutet meist das die von dir gewünschte Version von Nintendo entfernt wurde. Bitte versuche es mit einer neueren Version erneut.");
+                    return;
+                }
 
                 dlProgess.PerformStep();
-                //log("Downloading complete");
             }
 
             tmd.Close();
@@ -106,16 +112,14 @@ namespace _3DNUS
             {
                 //create cia
                 string command;
-                if (t_titleid.Text.Contains("."))
-                {
-                    command = " " + "tmp" + " " + t_titleid.Text + "\\" + title + ".cia";
-                }
-                else
-                {
-                    command = " " + "tmp" + " " + title + ".cia";
-                }
+
+                command = Environment.CurrentDirectory + "\\tmp" + " " + Environment.CurrentDirectory + "\\" + title + "\\v" + version + "\\" + title + ".cia";
+                Directory.CreateDirectory(Environment.CurrentDirectory + "\\" + title + "\\v" + version + "\\");
+
+                MessageBox.Show(command);
+
                 Process create = new Process();
-                create.StartInfo.FileName = "make_cdn_cia.exe";
+                create.StartInfo.FileName = Path.GetTempPath()+"make_cdn_cia.exe";
                 create.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 create.StartInfo.Arguments = command;
                 create.Start();
@@ -132,29 +136,15 @@ namespace _3DNUS
 
         private void Main_Load(object sender, EventArgs e)
         {
-            if (!System.IO.File.Exists("make_cdn_cia.exe"))
+            try
             {
-                DialogResult noCiaBuilder =  MessageBox.Show("Die Datei make_cdn_cia.exe konnte nicht gefunden werden!\n                              Soll sie erstellt werden?", "Fehler", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (noCiaBuilder == DialogResult.No)
-                {
-                    Application.Exit();
-                }
-
-                if (noCiaBuilder == DialogResult.Yes)
-                {
-                    try
-                    {
-                        System.IO.File.WriteAllBytes("make_cdn_cia.exe", Properties.Resources.make_cdn_cia);
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Beim Schreiben der Datei ist ein Fehler aufgetreten.", "Kritischer Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Application.Exit();
-                    }
-                }
+                File.WriteAllBytes(Path.GetTempPath() + "make_cdn_cia.exe", Properties.Resources.make_cdn_cia);
             }
-
+            catch (IOException)
+            {
+                MessageBox.Show("Ein Fehler ist aufgetreten als versucht wurde eine temporäre Datei zu erstellen!", "Fehler");
+                Application.Exit();
+            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

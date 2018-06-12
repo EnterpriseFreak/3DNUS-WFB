@@ -157,7 +157,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "v1.2 - ";
+            this.label5.Text = "v1.3 - ";
             // 
             // linkLabel1
             // 

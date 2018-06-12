@@ -9,3 +9,12 @@ C:\Documents and Settings\Freak\Desktop\Source\obj\Debug\GenerateResource.read.1
 C:\Documents and Settings\Freak\Desktop\Source\obj\Debug\GenerateResource.write.1.tlog
 C:\Documents and Settings\Freak\Desktop\Source\obj\Debug\3DNUS.exe
 C:\Documents and Settings\Freak\Desktop\Source\obj\Debug\3DNUS.pdb
+C:\Users\Open\Desktop\3DNUS-WFB-master\bin\Debug\3DNUS.exe.config
+C:\Users\Open\Desktop\3DNUS-WFB-master\obj\Debug\3DNUS.exe
+C:\Users\Open\Desktop\3DNUS-WFB-master\obj\Debug\3DNUS.pdb
+C:\Users\Open\Desktop\3DNUS-WFB-master\bin\Debug\3DNUS.exe
+C:\Users\Open\Desktop\3DNUS-WFB-master\bin\Debug\3DNUS.pdb
+C:\Users\Open\Desktop\3DNUS-WFB-master\obj\Debug\_3DNUS.credits.resources
+C:\Users\Open\Desktop\3DNUS-WFB-master\obj\Debug\_3DNUS.Main.resources
+C:\Users\Open\Desktop\3DNUS-WFB-master\obj\Debug\_3DNUS.Properties.Resources.resources
+C:\Users\Open\Desktop\3DNUS-WFB-master\obj\Debug\3DNUS.csproj.GenerateResource.Cache
