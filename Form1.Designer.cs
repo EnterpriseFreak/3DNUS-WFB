@@ -41,6 +41,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.dlProgess = new System.Windows.Forms.ProgressBar();
+            this.c_keepContents = new System.Windows.Forms.CheckBox();
+            this.b_listload = new System.Windows.Forms.Button();
+            this.loadListLoadFile = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -60,7 +63,7 @@
             this.t_version.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.t_version.Location = new System.Drawing.Point(483, 115);
             this.t_version.Name = "t_version";
-            this.t_version.Size = new System.Drawing.Size(121, 20);
+            this.t_version.Size = new System.Drawing.Size(66, 20);
             this.t_version.TabIndex = 1;
             // 
             // c_cia
@@ -68,7 +71,7 @@
             this.c_cia.AutoSize = true;
             this.c_cia.Checked = true;
             this.c_cia.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.c_cia.Location = new System.Drawing.Point(12, 212);
+            this.c_cia.Location = new System.Drawing.Point(12, 173);
             this.c_cia.Name = "c_cia";
             this.c_cia.Size = new System.Drawing.Size(130, 17);
             this.c_cia.TabIndex = 4;
@@ -157,7 +160,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "v1.3 - ";
+            this.label5.Text = "v1.5 - ";
             // 
             // linkLabel1
             // 
@@ -177,12 +180,38 @@
             this.dlProgess.Size = new System.Drawing.Size(480, 23);
             this.dlProgess.TabIndex = 12;
             // 
+            // c_keepContents
+            // 
+            this.c_keepContents.AutoSize = true;
+            this.c_keepContents.Location = new System.Drawing.Point(12, 192);
+            this.c_keepContents.Name = "c_keepContents";
+            this.c_keepContents.Size = new System.Drawing.Size(112, 17);
+            this.c_keepContents.TabIndex = 13;
+            this.c_keepContents.Text = "Contents behalten";
+            this.c_keepContents.UseVisualStyleBackColor = true;
+            // 
+            // b_listload
+            // 
+            this.b_listload.Location = new System.Drawing.Point(551, 115);
+            this.b_listload.Name = "b_listload";
+            this.b_listload.Size = new System.Drawing.Size(55, 20);
+            this.b_listload.TabIndex = 14;
+            this.b_listload.Text = "ListLoad";
+            this.b_listload.UseVisualStyleBackColor = true;
+            this.b_listload.Click += new System.EventHandler(this.b_listload_Click);
+            // 
+            // loadListLoadFile
+            // 
+            this.loadListLoadFile.Filter = "ListLoad Datei|*.lilo";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ClientSize = new System.Drawing.Size(616, 286);
+            this.Controls.Add(this.b_listload);
+            this.Controls.Add(this.c_keepContents);
             this.Controls.Add(this.dlProgess);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label5);
@@ -223,6 +252,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.ProgressBar dlProgess;
+        private System.Windows.Forms.CheckBox c_keepContents;
+        private System.Windows.Forms.Button b_listload;
+        private System.Windows.Forms.OpenFileDialog loadListLoadFile;
     }
 }
 

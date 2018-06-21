@@ -16,6 +16,8 @@ namespace _3DNUS
     public partial class Main : Form
     {
         string server = "http://nus.cdn.c.shop.nintendowifi.net/ccs/download/";
+        bool listLoadDownload = false;
+
         public Main()
         {
             InitializeComponent();
@@ -23,6 +25,7 @@ namespace _3DNUS
 
         private void b_download_Click(object sender, EventArgs e)
         {
+            listLoadDownload = false;
             dlProgess.Value = 0; //Downloadfortschritt auf 0 setzen
 
             if (!File.Exists("brickMsg.txt"))
@@ -116,21 +119,35 @@ namespace _3DNUS
                 command = Environment.CurrentDirectory + "\\tmp" + " " + Environment.CurrentDirectory + "\\" + title + "\\v" + version + "\\" + title + ".cia";
                 Directory.CreateDirectory(Environment.CurrentDirectory + "\\" + title + "\\v" + version + "\\");
 
-                MessageBox.Show(command);
-
                 Process create = new Process();
                 create.StartInfo.FileName = Path.GetTempPath()+"make_cdn_cia.exe";
                 create.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 create.StartInfo.Arguments = command;
                 create.Start();
                 create.WaitForExit();
-                Directory.Delete(ftmp, true);
-                MessageBox.Show("Download beendet, CIA wurde erstellt!", "Download fertig!");
+
+                if (!c_keepContents.Checked)
+                {
+                    Directory.Delete(ftmp, true);
+                }
+                else
+                {
+                    Directory.Move(ftmp, Environment.CurrentDirectory + "\\" + title + "\\v" + version + "\\contents");
+                }
+
+                if (!listLoadDownload)
+                {
+                    MessageBox.Show("Download beendet, CIA wurde erstellt!", "Download fertig!");
+                }
             }
             else
             {
                 Directory.Move(ftmp, cd + "\\" + title);
-                MessageBox.Show("Download beendet, die einzelnen contents wurden gespeichert!", "Download fertig!");
+
+                if (!listLoadDownload)
+                {
+                    MessageBox.Show("Download beendet, die einzelnen contents wurden gespeichert!", "Download fertig!");
+                }
             }
         }
 
@@ -152,6 +169,36 @@ namespace _3DNUS
             Form credits = new credits();
 
             credits.Show();
+        }
+
+        private void b_listload_Click(object sender, EventArgs e) //ListLoad Downloader
+        {
+            listLoadDownload = true;
+            loadListLoadFile.ShowDialog();
+
+            string[] titlesToDownload;
+
+            try
+            {
+                titlesToDownload = File.ReadAllLines(loadListLoadFile.FileName);
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Auf die angebene ListLoad-Datei konnte nicht zugegriffen werden!");
+                return;
+            }
+
+            MessageBox.Show("Es werden " + titlesToDownload.Length / 2 + " Titel gedownloadet!");
+
+            for (int dlTitles = 0; dlTitles < titlesToDownload.Length / 2 + 1;)
+            { 
+                singledownload(titlesToDownload[dlTitles], titlesToDownload[dlTitles + 1]);
+                dlTitles += 2;
+                dlProgess.Value = 0;
+            }
+
+            MessageBox.Show("Alle in der ListLoad-Datei gelisteten Titel wurden herruntergeladen!");
+
         }
     }
 }
