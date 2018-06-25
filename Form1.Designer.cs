@@ -156,11 +156,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(542, 269);
+            this.label5.Location = new System.Drawing.Point(533, 269);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.Size = new System.Drawing.Size(46, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "v1.5 - ";
+            this.label5.Text = "v1.5.1 - ";
             // 
             // linkLabel1
             // 

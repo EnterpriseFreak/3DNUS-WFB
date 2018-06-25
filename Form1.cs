@@ -28,6 +28,13 @@ namespace _3DNUS
             listLoadDownload = false;
             dlProgess.Value = 0; //Downloadfortschritt auf 0 setzen
 
+            if (t_titleid.Text.Contains("/../"))
+            {
+                MessageBox.Show("Warum so kryptisch? Versuch's doch mal mit 'ner einfachen TitleID ;)", "Du denkst wie ich...", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                t_titleid.Text = "";
+                return;
+            }
+
             if (!File.Exists("brickMsg.txt"))
             {
                 DialogResult brickWarning = MessageBox.Show("Die mit dem Programm erstellten CIA-Archive sollten sicher sein aber es kann immer etwas schief gehen und dein System bricken. Akezeptiertst du dieses Risiko? Wenn du dies nicht akzeptierst beende dieses Tool und entferne es von deinem PC.", "Bitte durchlesen!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
